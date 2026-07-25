@@ -1,0 +1,26 @@
+.button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1200;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #fff;
+  background: var(--gradient-primary);
+  box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.6);
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .button {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    width: 40px;
+    height: 40px;
+  }
+}

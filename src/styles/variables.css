@@ -1,0 +1,63 @@
+:root,
+[data-theme='dark'] {
+  /* Brand palette (fixed per brief) */
+  --color-primary: #2563eb;
+  --color-secondary: #7c3aed;
+  --color-bg: #0f172a;
+  --color-bg-alt: #0b1220;
+  --color-card: #1e293b;
+  --color-card-hover: #243349;
+  --color-text: #ffffff;
+  --color-text-muted: #94a3b8;
+  --color-accent: #38bdf8;
+  --color-border: rgba(148, 163, 184, 0.15);
+
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+
+  /* Typography */
+  --font-display: 'Clash Display', 'Sora', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --fs-xs: 0.8rem;
+  --fs-sm: 0.95rem;
+  --fs-base: 1rem;
+  --fs-md: 1.15rem;
+  --fs-lg: 1.5rem;
+  --fs-xl: 2rem;
+  --fs-2xl: 2.75rem;
+  --fs-3xl: 3.75rem;
+
+  /* Layout */
+  --container-width: 1180px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+
+  --shadow-soft: 0 20px 45px -20px rgba(2, 6, 23, 0.6);
+  --shadow-glow: 0 0 40px -10px rgba(56, 189, 248, 0.35);
+
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-slow: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  --nav-height: 76px;
+}
+
+/* Optional light theme (ThemeToggle support) */
+[data-theme='light'] {
+  --color-bg: #f4f6fb;
+  --color-bg-alt: #e9edf7;
+  --color-card: #ffffff;
+  --color-card-hover: #eef1f9;
+  --color-text: #0f172a;
+  --color-text-muted: #4b5876;
+  --color-border: rgba(15, 23, 42, 0.1);
+}

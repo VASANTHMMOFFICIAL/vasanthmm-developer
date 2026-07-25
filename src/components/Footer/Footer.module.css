@@ -1,0 +1,40 @@
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-4) 0;
+  background: var(--color-bg-alt);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.socials {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.socials a {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.socials a:hover {
+  color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.copy {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}

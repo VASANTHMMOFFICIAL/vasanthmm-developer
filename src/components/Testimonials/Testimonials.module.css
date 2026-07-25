@@ -1,0 +1,83 @@
+.slider {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+.quoteIcon {
+  font-size: 1.8rem;
+  color: var(--color-accent);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.viewport {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  width: 100%;
+}
+
+.quote {
+  font-size: var(--fs-md);
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+  line-height: 1.7;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.role {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.arrow:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.dotActive {
+  background: var(--color-accent);
+  width: 22px;
+  border-radius: 4px;
+}
