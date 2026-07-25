@@ -15,7 +15,7 @@ function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <p className={styles.logo}>
-          Vasanth<span className="gradient-text">.dev</span>
+          Vasanth<span className="gradient-text">.M.M</span>
         </p>
 
         <ul className={styles.socials}>

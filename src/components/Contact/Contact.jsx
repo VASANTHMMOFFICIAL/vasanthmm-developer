@@ -12,13 +12,13 @@ function Contact() {
     },
     {
       label: 'Phone',
-      value: '+91 90000 00000',
-      href: 'tel:+919000000000',
+      value: '+91 7550155332',
+      href: 'tel:+917550155332',
       icon: FiPhone,
     },
     {
       label: 'Location',
-      value: 'Tamil Nadu, India',
+      value: 'India ,Tamil Nadu, Chennai',
       href: '#home',
       icon: FiMapPin,
     },
