@@ -16,8 +16,8 @@ export const projects = [
       'A multi-step application portal with form validation, file uploads, and real-time status tracking powered by REST endpoints.',
     tech: ['React', 'REST API', 'React Router', 'Axios'],
     filters: ['React', 'REST API'],
-    github: 'https://github.com/vasanthmm/online-application-portal',
-    demo: 'https://demo.vasanthmm.dev/application-portal',
+    github: 'https://github.com/vasanthmmofficial/online-application-portal',
+    demo: 'https://vasanthmmofficial.github.io/Online-Application-Portal/',
     image: 'project-application-portal',
   },
   {

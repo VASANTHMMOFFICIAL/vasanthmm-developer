@@ -3,7 +3,7 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi'
 import styles from './ProjectCard.module.css'
 
 const imageMap = {
-  'project-application-portal': new URL('../../assets/images/project-application-portal.svg', import.meta.url).href,
+  'project-application-portal': new URL('../../assets/images/project-application-portal.png', import.meta.url).href,
   'project-dashboard': new URL('../../assets/images/project-dashboard.svg', import.meta.url).href,
   'project-food-dashboard': new URL('../../assets/images/project-food-dashboard.svg', import.meta.url).href,
   'project-hospital-ui': new URL('../../assets/images/project-hospital-ui.svg', import.meta.url).href,
