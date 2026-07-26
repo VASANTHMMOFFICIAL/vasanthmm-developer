@@ -5,7 +5,7 @@ import { SiVite } from 'react-icons/si'
 import { useTypingEffect } from '../../hooks/useTypingEffect.js'
 import profilePhoto from '../../assets/images/profile.jpg'
 import styles from './Hero.module.css'
-import resumePdf from "./assets/PDF/VASANTH_MM_RESUME.pdf";
+import resumePdf from "../../assets/PDF/VASANTH_MM_RESUME.pdf";
 
 const ROLES = [
   'Frontend Developer',
