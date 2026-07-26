@@ -95,7 +95,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <a href="/VASANTH_MM_RESUME.pdf" download className="btn btn-primary">
+            <a href="assets/PDF/Vasanth_M.M_Resume.pdf" download className="btn btn-primary">
               <FiDownload /> Download Resume
             </a>
             <button type="button" className="btn btn-outline" onClick={handleHireMe}>
