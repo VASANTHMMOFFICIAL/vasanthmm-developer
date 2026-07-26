@@ -1,1 +1,22 @@
-<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg"><rect width="800" height="500" rx="28" fill="#1f2937"/><rect x="74" y="72" width="652" height="356" rx="24" fill="#111827" stroke="#475569" stroke-width="2"/><rect x="108" y="112" width="260" height="180" rx="18" fill="#ef4444"/><rect x="402" y="112" width="258" height="180" rx="18" fill="#f59e0b"/><rect x="108" y="326" width="552" height="56" rx="14" fill="#22c55e"/><rect x="108" y="404" width="420" height="12" rx="6" fill="#64748b"/><rect x="108" y="428" width="300" height="12" rx="6" fill="#94a3b8"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <circle cx="680" cy="500" r="140" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="100" cy="80" r="90" fill="rgba(255,255,255,0.07)"/>
+  <text x="60" y="330" font-family="Arial, sans-serif" font-weight="800" font-size="52" fill="rgba(255,255,255,0.95)">Food Orders</text>
+  <text x="60" y="375" font-family="monospace" font-size="22" letter-spacing="2" fill="rgba(255,255,255,0.75)">ADMIN PANEL</text>
+</svg>

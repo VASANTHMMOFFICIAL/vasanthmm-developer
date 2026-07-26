@@ -1,37 +1,20 @@
-import { useCallback, useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import { FaQuoteLeft } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { FaStar, FaQuoteLeft } from 'react-icons/fa'
 import { testimonials } from '../../data/services.js'
+import { useScrollAnimation } from '../../hooks/useScrollAnimation.js'
 import styles from './Testimonials.module.css'
 
+function getInitials(name) {
+  return name
+    .split(' ')
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+}
+
 function Testimonials() {
-  const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState(1)
-
-  const goTo = useCallback(
-    (next) => {
-      setDirection(next > index || (index === testimonials.length - 1 && next === 0) ? 1 : -1)
-      setIndex(next)
-    },
-    [index],
-  )
-
-  const next = useCallback(() => {
-    goTo((index + 1) % testimonials.length)
-  }, [goTo, index])
-
-  const prev = () => {
-    goTo((index - 1 + testimonials.length) % testimonials.length)
-  }
-
-  // Auto-advance every 6 seconds
-  useEffect(() => {
-    const timer = setInterval(next, 6000)
-    return () => clearInterval(timer)
-  }, [next])
-
-  const current = testimonials[index]
+  const [ref, visible] = useScrollAnimation({ threshold: 0.15 })
 
   return (
     <section id="testimonials" className="section">
@@ -43,45 +26,35 @@ function Testimonials() {
           </h2>
         </div>
 
-        <div className={styles.slider}>
-          <FaQuoteLeft className={styles.quoteIcon} aria-hidden="true" />
+        <div ref={ref} className={styles.grid}>
+          {testimonials.map((t, i) => (
+            <motion.figure
+              key={t.id}
+              className={`${styles.card} ${i % 2 === 1 ? styles.cardOffset : ''}`}
+              initial={{ opacity: 0, y: 30 }}
+              animate={visible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              whileHover={{ y: -6 }}
+            >
+              <FaQuoteLeft className={styles.quoteIcon} aria-hidden="true" />
 
-          <div className={styles.viewport}>
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={current.id}
-                custom={direction}
-                initial={{ opacity: 0, x: direction * 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -direction * 40 }}
-                transition={{ duration: 0.4 }}
-                className={styles.slide}
-              >
-                <p className={styles.quote}>&ldquo;{current.quote}&rdquo;</p>
-                <p className={styles.name}>{current.name}</p>
-                <p className={styles.role}>{current.role}</p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              <div className={styles.stars} aria-label="5 out of 5 stars">
+                {Array.from({ length: 5 }).map((_, starIndex) => (
+                  <FaStar key={starIndex} />
+                ))}
+              </div>
 
-          <div className={styles.controls}>
-            <button onClick={prev} aria-label="Previous testimonial" className={styles.arrow}>
-              <FiChevronLeft />
-            </button>
-            <div className={styles.dots}>
-              {testimonials.map((t, i) => (
-                <button
-                  key={t.id}
-                  className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to testimonial ${i + 1}`}
-                />
-              ))}
-            </div>
-            <button onClick={next} aria-label="Next testimonial" className={styles.arrow}>
-              <FiChevronRight />
-            </button>
-          </div>
+              <blockquote className={styles.quote}>&ldquo;{t.quote}&rdquo;</blockquote>
+
+              <figcaption className={styles.author}>
+                <span className={styles.avatar}>{getInitials(t.name)}</span>
+                <span>
+                  <span className={styles.name}>{t.name}</span>
+                  <span className={styles.role}>{t.role}</span>
+                </span>
+              </figcaption>
+            </motion.figure>
+          ))}
         </div>
       </div>
     </section>

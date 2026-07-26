@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
+import logo from '../../assets/images/logo.png'
 import styles from './Loader.module.css'
-
-const letters = 'VMM'.split('')
 
 /**
  * Full-screen loading screen shown briefly on first load.
@@ -14,18 +13,14 @@ function Loader() {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
     >
-      <div className={styles.mark}>
-        {letters.map((letter, i) => (
-          <motion.span
-            key={i}
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: i * 0.12, duration: 0.5, ease: 'easeOut' }}
-          >
-            {letter}
-          </motion.span>
-        ))}
-      </div>
+      <motion.img
+        src={logo}
+        alt="VMM"
+        className={styles.mark}
+        initial={{ y: 24, opacity: 0, scale: 0.9 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      />
       <motion.div
         className={styles.bar}
         initial={{ scaleX: 0 }}

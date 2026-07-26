@@ -1,3 +1,10 @@
+import applicationPortalImg from '../assets/images/project-application-portal.png'
+import dashboardImg from '../assets/images/project-dashboard.svg'
+import foodDashboardImg from '../assets/images/project-food-dashboard.svg'
+import hospitalUiImg from '../assets/images/project-hospital-ui.svg'
+import jobPortalImg from '../assets/images/project-job-portal.svg'
+import ecommerceImg from '../assets/images/project-ecommerce.svg'
+
 export const projectTechFilters = [
   'All',
   'React',
@@ -18,7 +25,7 @@ export const projects = [
     filters: ['React', 'REST API'],
     github: 'https://github.com/vasanthmmofficial/online-application-portal',
     demo: 'https://vasanthmmofficial.github.io/Online-Application-Portal/',
-    image: 'project-application-portal',
+    image: applicationPortalImg,
   },
   {
     id: 'dashboard-management-system',
@@ -30,7 +37,7 @@ export const projects = [
     filters: ['React', 'Dashboard'],
     github: 'https://github.com/vasanthmm/dashboard-management-system',
     demo: 'https://demo.vasanthmm.dev/dashboard',
-    image: 'project-dashboard',
+    image: dashboardImg,
   },
   {
     id: 'food-ordering-dashboard',
@@ -42,7 +49,7 @@ export const projects = [
     filters: ['React', 'Admin Panel'],
     github: 'https://github.com/vasanthmm/food-ordering-dashboard',
     demo: 'https://demo.vasanthmm.dev/food-dashboard',
-    image: 'project-food-dashboard',
+    image: foodDashboardImg,
   },
   {
     id: 'hospital-management-ui',
@@ -54,7 +61,7 @@ export const projects = [
     filters: ['React', 'UI Design'],
     github: 'https://github.com/vasanthmm/hospital-management-ui',
     demo: 'https://demo.vasanthmm.dev/hospital-ui',
-    image: 'project-hospital-ui',
+    image: hospitalUiImg,
   },
   {
     id: 'job-portal',
@@ -66,7 +73,7 @@ export const projects = [
     filters: ['React', 'REST API'],
     github: 'https://github.com/vasanthmm/job-portal',
     demo: 'https://demo.vasanthmm.dev/job-portal',
-    image: 'project-job-portal',
+    image: jobPortalImg,
   },
   {
     id: 'ecommerce-website',
@@ -78,6 +85,6 @@ export const projects = [
     filters: ['React', 'UI Design'],
     github: 'https://github.com/vasanthmm/ecommerce-website',
     demo: 'https://demo.vasanthmm.dev/ecommerce',
-    image: 'project-ecommerce',
+    image: ecommerceImg,
   },
 ]

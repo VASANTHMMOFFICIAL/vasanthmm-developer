@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
 import ThemeToggle from '../ThemeToggle/ThemeToggle.jsx'
+import logo from '../../assets/images/logo-icon.png'
 import styles from './Navbar.module.css'
 
 const NAV_LINKS = [
@@ -16,37 +17,100 @@ const NAV_LINKS = [
 ]
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
-  // Shrink / add background once the page has scrolled a little
+  // Scroll-spy: highlight the dot for the section in view
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    let observer
+    let scrollTimer
 
-  // Scroll-spy: highlight the nav link for the section in view
-  useEffect(() => {
-    const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
-      Boolean,
-    )
+    const setupObserver = () => {
+      const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
+        Boolean,
+      )
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+      if (sections.length === 0) return false
+
+      if (observer) observer.disconnect()
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          let maxRatio = 0
+          let activeId = 'home'
+
+          entries.forEach((entry) => {
+            if (entry.intersectionRatio > maxRatio) {
+              maxRatio = entry.intersectionRatio
+              activeId = entry.target.id
+            }
+          })
+
+          if (maxRatio > 0) {
+            setActiveSection(activeId)
           }
-        })
-      },
-      { rootMargin: '-40% 0px -50% 0px', threshold: 0 },
-    )
+        },
+        {
+          rootMargin: '-30% 0px -30% 0px',
+          threshold: [0, 0.25, 0.5, 0.75, 1],
+        },
+      )
 
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
+      sections.forEach((section) => {
+        observer.observe(section)
+      })
+
+      return true
+    }
+
+    // Try to setup observer immediately
+    const isSetup = setupObserver()
+
+    if (!isSetup) {
+      // If not all sections found, retry after a delay (for lazy-loaded components)
+      scrollTimer = setTimeout(() => {
+        setupObserver()
+      }, 800)
+    }
+
+    // Fallback scroll listener for extra reliability
+    const handleScroll = () => {
+      const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
+        Boolean,
+      )
+
+      if (sections.length === 0) return
+
+      const scrollTop = window.scrollY + window.innerHeight / 2
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect()
+        const sectionTop = rect.top + window.scrollY
+        const sectionBottom = sectionTop + rect.height
+
+        if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+          setActiveSection(section.id)
+          break
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      clearTimeout(scrollTimer)
+      observer?.disconnect()
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
+
+  // Lock body scroll while the full-screen mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
 
   const handleNavClick = (id) => {
     setMenuOpen(false)
@@ -54,53 +118,91 @@ function Navbar() {
   }
 
   return (
-    <motion.header
-      className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-    >
-      <div className={`container ${styles.inner}`}>
-        <button
+    <>
+      {/* Corner logo + theme toggle, always visible */}
+      <div className={styles.corner}>
+     <button
           className={styles.logo}
           onClick={() => handleNavClick('home')}
           aria-label="Go to home section"
         >
-          <span className="gradient-text">VMM</span>
+          <img src={logo} alt="VMM logo" className={styles.logoImg} />
         </button>
-
-        <nav className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.id}
-              className={`${styles.link} ${
-                activeSection === link.id ? styles.active : ''
-              }`}
-              onClick={() => handleNavClick(link.id)}
-            >
-              {link.label}
-            </button>
-          ))}
-          <div className={styles.mobileToggleWrap}>
-            <ThemeToggle />
-          </div>
-        </nav>
-
-        <div className={styles.actions}>
-          <div className={styles.desktopToggle}>
-            <ThemeToggle />
-          </div>
-          <button
-            className={styles.burger}
-            onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <FiX /> : <FiMenu />}
-          </button>
-        </div>
       </div>
-    </motion.header>
+
+      <div className={styles.cornerActions}>
+        <div className={styles.desktopToggle}>
+          <ThemeToggle />
+        </div>
+        <button
+          className={styles.burger}
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={menuOpen}
+        >
+          <FiMenu />
+        </button>
+      </div>
+
+      {/* Fixed side dot navigation — desktop only */}
+      <nav className={styles.dotNav} aria-label="Section navigation">
+        {NAV_LINKS.map((link) => (
+          <button
+            key={link.id}
+            className={`${styles.dotBtn} ${
+              activeSection === link.id ? styles.dotActive : ''
+            }`}
+            onClick={() => handleNavClick(link.id)}
+            aria-label={`Go to ${link.label}`}
+            aria-current={activeSection === link.id}
+          >
+            <span className={styles.dot} />
+            <span className={styles.dotTooltip}>{link.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className={styles.overlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <button
+              className={styles.overlayClose}
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <FiX />
+            </button>
+
+            <nav className={styles.overlayLinks}>
+              {NAV_LINKS.map((link, i) => (
+                <motion.button
+                  key={link.id}
+                  className={`${styles.overlayLink} ${
+                    activeSection === link.id ? styles.overlayLinkActive : ''
+                  }`}
+                  onClick={() => handleNavClick(link.id)}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: i * 0.05 }}
+                >
+                  {link.label}
+                </motion.button>
+              ))}
+            </nav>
+
+            <div className={styles.overlayFooter}>
+              <ThemeToggle />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 

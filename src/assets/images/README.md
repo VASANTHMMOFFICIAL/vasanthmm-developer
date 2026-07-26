@@ -1,17 +1,18 @@
 # Images
 
-Drop your project screenshots and photos here, for example:
+Each project already has a generated cover image in this folder
+(`project-application-portal.svg`, `project-dashboard.svg`, etc.) —
+a gradient card with the project name, used both on the project card
+and in the click-to-expand lightbox.
 
-- `project-application-portal.png`
-- `project-dashboard.png`
-- `project-food-dashboard.png`
-- `project-hospital-ui.png`
-- `project-job-portal.png`
-- `project-ecommerce.png`
-- `profile.jpg` (optional, for the About section)
+`profile-placeholder.svg` is used for the Hero photo.
 
-Right now `ProjectCard` renders a gradient placeholder with the project's
-initials instead of an image, so the site works out of the box with no
-images required. Once you add real screenshots, import them in
-`src/data/projects.js` and swap the `<div className={styles.imagePlaceholder}>`
-block in `src/components/ProjectCard/ProjectCard.jsx` for an `<img>` tag.
+To use your own screenshots or photo instead:
+
+1. Add your image file here (png/jpg/svg all work).
+2. Update the matching `import` and `image` field in
+   `src/data/projects.js` (for a project) or the import in
+   `src/components/Hero/Hero.jsx` (for the profile photo).
+
+No other code changes are needed — cards, the lightbox, and the hero
+all just render whatever `image` points to.

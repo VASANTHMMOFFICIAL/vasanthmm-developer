@@ -1,26 +1,59 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiMail, FiMapPin, FiPhone, FiArrowRight } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin, FiCopy, FiCheck, FiArrowRight } from 'react-icons/fi'
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { useScrollAnimation } from '../../hooks/useScrollAnimation.js'
 import styles from './Contact.module.css'
 
+const EMAIL = 'vasanthmmofficial@gmail.com'
+const PHONE = '+91 7550155332'
+
+
+
+/**
+ * Contact section built entirely from direct links — no form, nothing
+ * saved to a database. A statement + availability badge sits on the
+ * left; a list of clickable contact methods (mail, phone, location)
+ * sits on the right, each acting like a settings-style row.
+ */
 function Contact() {
-  const contactLinks = [
+  const [copied, setCopied] = useState(false)
+  const [ref, visible] = useScrollAnimation({ threshold: 0.25 })
+
+  const handleCopyEmail = async (e) => {
+    e.preventDefault()
+    try {
+      await navigator.clipboard.writeText(EMAIL)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      window.location.href = `mailto:${EMAIL}`
+    }
+  }
+
+  const methods = [
     {
-      label: 'Email',
-      value: 'vasanthmmofficial@gmail.com',
-      href: 'mailto:vasanthmmofficial@gmail.com',
+      id: 'email',
       icon: FiMail,
+      label: 'Email',
+      value: copied ? 'Copied to clipboard!' : EMAIL,
+      onClick: handleCopyEmail,
+      trailingIcon: copied ? FiCheck : FiCopy,
     },
     {
-      label: 'Phone',
-      value: '+91 7550155332',
-      href: 'tel:+917550155332',
+      id: 'phone',
       icon: FiPhone,
+      label: 'Phone',
+      value: PHONE,
+      href: `tel:${PHONE.replace(/\s/g, '')}`,
+      trailingIcon: FiArrowRight,
     },
     {
-      label: 'Location',
-      value: 'India ,Tamil Nadu, Chennai',
-      href: '#home',
+      id: 'location',
       icon: FiMapPin,
+      label: 'Location',
+      value: 'Chennai, Tamil Nadu, India',
+      trailingIcon: null,
     },
   ]
 
@@ -32,45 +65,82 @@ function Contact() {
           <h2 className="section-title">
             Let&apos;s <span className="gradient-text">build something</span>
           </h2>
-          <p className="section-subtitle">
-            Have a project in mind or just want to say hi? My inbox is open.
-          </p>
         </div>
 
-        <div className={styles.grid}>
+        <div ref={ref} className={styles.grid}>
           <motion.div
-            className={styles.card}
+            className={styles.statementCol}
             initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
+            animate={visible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.55 }}
           >
-            <p className={styles.eyebrow}>Available for work</p>
-            <h3>Let&apos;s create something meaningful together.</h3>
-            <p className={styles.description}>
-              I’m currently open to freelance collaborations, product builds, and front-end opportunities.
+            <div className={styles.availability}>
+              <span className={styles.pulseDot} aria-hidden="true" />
+              Available for freelance &amp; full-time work
+            </div>
+
+            <p className={styles.statement}>
+              Got a project, a role, or just a question about how something
+              was built? Reach out through whichever channel suits you best
+              — I reply quickly.
             </p>
-            <a href="mailto:vasanthmmofficial@gmail.com" className="btn btn-primary">
-              Start a conversation <FiArrowRight />
-            </a>
+
+    
           </motion.div>
 
           <motion.div
-            className={styles.linksPanel}
+            className={styles.methodsCol}
             initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
+            animate={visible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.55, delay: 0.1 }}
           >
-            {contactLinks.map(({ label, value, href, icon: Icon }) => (
-              <a key={label} href={href} className={styles.infoItem}>
-                <Icon />
-                <div>
-                  <p className={styles.infoLabel}>{label}</p>
-                  <p>{value}</p>
+            {methods.map((method) => {
+              const Icon = method.icon
+              const Trailing = method.trailingIcon
+              const content = (
+                <>
+                  <span className={styles.methodIcon}>
+                    <Icon />
+                  </span>
+                  <span className={styles.methodText}>
+                    <span className={styles.methodLabel}>{method.label}</span>
+                    <span className={styles.methodValue}>{method.value}</span>
+                  </span>
+                  {Trailing && (
+                    <span className={styles.methodTrailing}>
+                      <Trailing />
+                    </span>
+                  )}
+                </>
+              )
+
+              if (method.href) {
+                return (
+                  <a key={method.id} href={method.href} className={styles.methodRow}>
+                    {content}
+                  </a>
+                )
+              }
+
+              if (method.onClick) {
+                return (
+                  <button
+                    key={method.id}
+                    type="button"
+                    className={styles.methodRow}
+                    onClick={method.onClick}
+                  >
+                    {content}
+                  </button>
+                )
+              }
+
+              return (
+                <div key={method.id} className={styles.methodRow}>
+                  {content}
                 </div>
-              </a>
-            ))}
+              )
+            })}
           </motion.div>
         </div>
       </div>

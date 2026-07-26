@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { FiFolder, FiCalendar, FiCode, FiGithub } from 'react-icons/fi'
 import { achievements } from '../../data/services.js'
 import { useScrollAnimation } from '../../hooks/useScrollAnimation.js'
 import styles from './Statistics.module.css'
+
+const ICONS = {
+  projects: FiFolder,
+  experience: FiCalendar,
+  technologies: FiCode,
+  commits: FiGithub,
+}
 
 /**
  * Animates a number counting up from 0 to `value` once `start` is true.
@@ -42,21 +50,27 @@ function Statistics() {
           </h2>
         </div>
 
-        <div ref={ref} className={styles.grid}>
-          {achievements.map((item, i) => (
-            <motion.div
-              key={item.id}
-              className={styles.card}
-              initial={{ opacity: 0, y: 20 }}
-              animate={visible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <p className={styles.number}>
-                <Counter value={item.value} start={visible} />
-              </p>
-              <p className={styles.label}>{item.label}</p>
-            </motion.div>
-          ))}
+        <div ref={ref} className={styles.strip}>
+          {achievements.map((item, i) => {
+            const Icon = ICONS[item.id] ?? FiFolder
+            return (
+              <motion.div
+                key={item.id}
+                className={styles.stat}
+                initial={{ opacity: 0, y: 20 }}
+                animate={visible ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <span className={styles.icon}>
+                  <Icon />
+                </span>
+                <p className={styles.number}>
+                  <Counter value={item.value} start={visible} />
+                </p>
+                <p className={styles.label}>{item.label}</p>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

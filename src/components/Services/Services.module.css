@@ -1,23 +1,44 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 .card {
+  position: relative;
+  overflow: hidden;
   background: var(--color-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
-  transition: box-shadow var(--transition-fast), background var(--transition-fast);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .card:hover {
+  border-color: var(--color-accent);
   box-shadow: var(--shadow-soft);
-  background: var(--color-card-hover);
+}
+
+.watermark {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  font-size: 7rem;
+  color: var(--color-border);
+  opacity: 0.5;
+  pointer-events: none;
+  transition: transform var(--transition-slow), opacity var(--transition-slow);
+}
+
+.card:hover .watermark {
+  transform: scale(1.1) rotate(8deg);
+  opacity: 0.7;
 }
 
 .iconWrap {
+  position: relative;
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
@@ -31,11 +52,30 @@
 }
 
 .card h3 {
+  position: relative;
   font-size: var(--fs-md);
   margin-bottom: 0.5rem;
 }
 
 .card p {
+  position: relative;
   color: var(--color-text-muted);
   font-size: var(--fs-sm);
+  margin-bottom: var(--space-2);
+}
+
+.learnMore {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

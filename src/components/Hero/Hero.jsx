@@ -1,22 +1,24 @@
 import { motion } from 'framer-motion'
-import { FiDownload, FiArrowRight } from 'react-icons/fi'
-import { FaReact, FaJs, FaCss3Alt } from 'react-icons/fa'
+import { FiDownload, FiArrowRight, FiStar } from 'react-icons/fi'
+import { FaReact, FaJs, FaCss3Alt, FaHtml5, FaGitAlt, FaGithub } from 'react-icons/fa'
+import { SiVite } from 'react-icons/si'
 import { useTypingEffect } from '../../hooks/useTypingEffect.js'
-import profileAvatar from '../../assets/images/vasanthmm.jpg'
+import profilePhoto from '../../assets/images/profile.jpg'
 import styles from './Hero.module.css'
 
 const ROLES = [
   'Frontend Developer',
   'React Developer',
-  'UI Engineer',
   'JavaScript Developer',
 ]
 
-const floatingIcons = [
-  { Icon: FaReact, className: styles.icon1 },
-  { Icon: FaJs, className: styles.icon2 },
-  { Icon: FaCss3Alt, className: styles.icon3 },
+const stats = [
+  { value: '2+', label: 'Years Experience' },
+  { value: '10+', label: 'Successful Projects' },
+  { value: '10+', label: 'Happy Clients' },
 ]
+
+const marqueeIcons = [FaReact, FaJs, FaHtml5, FaCss3Alt, SiVite, FaGitAlt, FaGithub]
 
 function Hero() {
   const typed = useTypingEffect(ROLES)
@@ -27,102 +29,135 @@ function Hero() {
 
   return (
     <section id="home" className={styles.hero}>
-      <div className={styles.animatedBg} aria-hidden="true" />
-
-      {floatingIcons.map(({ Icon, className }, i) => (
-        <motion.div
-          key={i}
-          className={`${styles.floatIcon} ${className}`}
-          animate={{ y: [0, -18, 0] }}
-          transition={{ duration: 4 + i, repeat: Infinity, ease: 'easeInOut' }}
-          aria-hidden="true"
-        >
-          <Icon />
-        </motion.div>
-      ))}
+      <div className={styles.split} aria-hidden="true" />
+      <div className={styles.dotGrid} aria-hidden="true" />
 
       <div className={`container ${styles.content}`}>
         <motion.div
-          className={styles.heroCard}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          className={styles.textCol}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className={styles.textBlock}>
-            <motion.p
-              className={styles.greeting}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              Hi, I&apos;m
-            </motion.p>
+          {/* <motion.div
+            className={styles.experienceBadge}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <FiStar className={styles.badgeIcon} aria-hidden="true" />
+            <span>2+ Years of Professional Experience</span>
+          </motion.div> */}
 
-            <motion.h1
-              className={styles.name}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              Vasanth <span className="gradient-text">M.M</span>
-            </motion.h1>
+          <motion.p
+            className={styles.greeting}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Hello, I&apos;m
+          </motion.p>
 
-            <motion.h2
-              className={styles.role}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span aria-hidden="true">{typed}</span>
-              <span className={styles.cursor} aria-hidden="true" />
-              <span className="visually-hidden">{ROLES[0]}</span>
-            </motion.h2>
-
-            <motion.p
-              className={styles.tagline}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              2+ years building responsive, scalable web applications with React
-              and modern JavaScript — focused on clean code and delightful user
-              experiences.
-            </motion.p>
-
-            <motion.div
-              className={styles.cta}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <a href="/resume-vasanth-mm.pdf" download className="btn btn-primary">
-                <FiDownload /> Download Resume
-              </a>
-              <button type="button" className="btn btn-outline" onClick={handleHireMe}>
-                Hire Me <FiArrowRight />
-              </button>
-            </motion.div>
-          </div>
-
-          <motion.div
-            className={styles.imageWrap}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <motion.h1
+            className={styles.name}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <img src={profileAvatar} alt="Vasanth M.M portrait" className={styles.avatar} />
+            Vasanth <span className="gradient-text">.M.M</span>
+          </motion.h1>
+
+          <motion.h2
+            className={styles.role}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <span aria-hidden="true">{typed}</span>
+            <span className={styles.cursor} aria-hidden="true" />
+            <span className="visually-hidden"></span>
+          </motion.h2>
+
+          <motion.p
+            className={styles.tagline}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            With 2+ years of expertise, I craft exceptional digital experiences. 
+            Specialized in building high-performance React applications, scalable 
+            web solutions, and pixel-perfect UI designs that engage and delight users.
+          </motion.p>
+
+          <motion.div
+            className={styles.cta}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <a href="/VASANTH_MM_RESUME.pdf" download className="btn btn-primary">
+              <FiDownload /> Download Resume
+            </a>
+            <button type="button" className="btn btn-outline" onClick={handleHireMe}>
+              Let&apos;s Collaborate <FiArrowRight />
+            </button>
           </motion.div>
+
+          <motion.div
+            className={styles.statRow}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            {stats.map((stat, i) => (
+              <motion.div 
+                key={stat.label} 
+                className={styles.statItem}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                {/* {i > 0 && <span className={styles.statDivider} aria-hidden="true" />} */}
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className={styles.photoCol}
+          initial={{ opacity: 0, scale: 0.8, rotateY: 20 }}
+          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          style={{ perspective: '1000px' }}
+        >
+          <div className={styles.frameWrap}>
+            <div className={styles.glowEffect} aria-hidden="true" />
+            <span className={styles.frameOffset} aria-hidden="true" />
+            <div className={styles.frame}>
+              <img src={profilePhoto} alt="Vasanth M.M - Senior Developer" />
+            </div>
+            <motion.div
+              className={styles.experiencePill}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <span className={styles.pillGlow} aria-hidden="true" />
+              <span className={styles.pillText}>2+ Years Expert</span>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 
-      <motion.div
-        className={styles.scrollCue}
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        aria-hidden="true"
-      >
-        <span />
-      </motion.div>
+      {/* <div className={styles.marquee} aria-hidden="true">
+        <div className={styles.marqueeTrack}>
+          {[...marqueeIcons, ...marqueeIcons, ...marqueeIcons].map((Icon, i) => (
+            <span key={i} className={styles.marqueeIcon}>
+              <Icon />
+            </span>
+          ))}
+        </div>
+      </div> */}
     </section>
   )
 }

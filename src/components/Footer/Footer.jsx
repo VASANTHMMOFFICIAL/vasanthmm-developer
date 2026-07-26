@@ -1,36 +1,69 @@
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { FiArrowUp } from 'react-icons/fi'
 import styles from './Footer.module.css'
 
+const quickLinks = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+]
+
 const socials = [
-  { icon: FaGithub, href: 'https://github.com/vasanthmmofficial', label: 'VASANTHMMOFFICIAL' },
-  { icon: FaLinkedin, href: 'https://linkedin.com/in/vasanthmm', label: 'LinkedIn' },
-  { icon: FaTwitter, href: 'https://twitter.com/vasanthmm', label: 'Twitter' },
-  { icon: FaEnvelope, href: 'mailto:vasanth.mm.dev@gmail.com', label: 'Email' },
+  { icon: FaGithub, href: 'https://github.com/VASANTHMMOFFICIAL', label: 'GitHub' },
+  { icon: FaLinkedin, href: 'https://www.linkedin.com/in/vasanth-m-m?utm_source=share_via&utm_content=profile&utm_medium=member_android', label: 'LinkedIn' },
+  // { icon: FaTwitter, href: 'https://twitter.com/vasanthmm', label: 'Twitter' },
 ]
 
 function Footer() {
   const year = new Date().getFullYear()
 
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <footer className={styles.footer}>
-      <div className={`container ${styles.inner}`}>
-        <p className={styles.logo}>
-          Vasanth<span className="gradient-text">.M.M</span>
-        </p>
+      <div className={styles.wordmarkWrap} aria-hidden="true">
+        <span className={styles.wordmark}>VASANTH</span>
+      </div>
 
-        <ul className={styles.socials}>
-          {socials.map(({ icon: Icon, href, label }) => (
-            <li key={label}>
-              <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+      <div className={`container ${styles.content}`}>
+        <div className={styles.row}>
+          <p className={styles.logo}>
+           <span className="gradient-text">VMM</span>
+          </p>
+
+          <nav className={styles.links}>
+            {quickLinks.map((link) => (
+              <button key={link.id} onClick={() => scrollToSection(link.id)}>
+                {link.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className={styles.socials}>
+            {socials.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={styles.socialIcon}
+              >
                 <Icon />
               </a>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+        </div>
 
-        <p className={styles.copy}>
-          © {year} Vasanth M.M. All rights reserved.
-        </p>
+        <div className={styles.divider} />
+
+        <div className={styles.bottomRow}>
+          <p className={styles.copy}>© {year} Vasanth M.M. All rights reserved.</p>
+     
+        </div>
       </div>
     </footer>
   )

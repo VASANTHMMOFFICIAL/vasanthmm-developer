@@ -13,7 +13,7 @@ function ThemeToggle() {
   return (
     <button
       type="button"
-      className={`${styles.toggle} ${isDark ? styles.dark : styles.light}`}
+      className={styles.toggle}
       onClick={toggleTheme}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
       aria-pressed={!isDark}

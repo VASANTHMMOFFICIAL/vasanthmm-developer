@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { FiArrowRight } from 'react-icons/fi'
 import { services } from '../../data/services.js'
 import { useScrollAnimation } from '../../hooks/useScrollAnimation.js'
 import styles from './Services.module.css'
@@ -26,13 +27,19 @@ function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={visible ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -6 }}
               >
-                <div className={styles.iconWrap}>
+                <Icon className={styles.watermark} aria-hidden="true" />
+
+                <span className={styles.iconWrap}>
                   <Icon />
-                </div>
+                </span>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
+
+                <span className={styles.learnMore}>
+                  Learn more <FiArrowRight />
+                </span>
               </motion.div>
             )
           })}

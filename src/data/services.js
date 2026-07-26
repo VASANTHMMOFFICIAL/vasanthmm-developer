@@ -35,7 +35,7 @@ export const achievements = [
   { id: 'projects', label: 'Projects Delivered', value: 6 },
   { id: 'experience', label: 'Years of Experience', value: 2 },
   { id: 'technologies', label: 'Technologies Used', value: 12 },
-  { id: 'commits', label: 'GitHub Contributions', value: 800 },
+  { id: 'commits', label: 'GitHub Contributions', value: 6 },
 ]
 
 export const testimonials = [
@@ -64,25 +64,47 @@ export const testimonials = [
 
 export const experience = [
   {
-    id: 'exp1',
-    role: 'Frontend Developer',
-    company: 'Bright Bench Technologies',
     period: '2024 — Present',
-    points: [
-      'Built and maintained reusable React component libraries used across three product teams.',
-      'Improved page load performance through code-splitting and lazy loading.',
-      'Collaborated with designers to translate Figma files into pixel-accurate, responsive UI.',
+    role: 'Frontend Engineer',
+    company: 'Svn Imaging Pvt Ltd.',
+    description:
+      'Leading frontend architecture for a suite of fintech products. Implemented micro-frontend architecture, reduced bundle size by 40%, and mentored a team of 2 developers.',
+    technologies: [
+      'HTML',
+      'CSS',
+      'JQuery',
+      'JavaScript',
+      'Bootstrap',
+      'React Bootstrap',
+      'React',
+      'FPDF',
+      'SQL',
+      'Postgresql',
+      'DataTables',
     ],
+    current: true,
+  },
+  // Add more experiences here as needed
+]
+
+export const education = [
+  {
+    period: '2020 — 2023',
+    degree: 'Bachelor of Engineering in Computer Science Engineering',
+    institution: 'S.A. Engineering College (Anna University)',
+    // description:
+    //   'Graduated with honors. Specialized in web technologies and software engineering. Completed major projects in full-stack development and cloud computing.',
+    achievements: ['CGPA: 76.8', 'Best Project Award 2023'],
+    current: false,
   },
   {
-    id: 'exp2',
-    role: 'Frontend Developer (Associate)',
-    company: 'Loop Studio',
-    period: '2023 — 2024',
-    points: [
-      'Developed admin dashboards and customer-facing UIs with React and REST APIs.',
-      'Implemented form validation and EmailJS-based contact flows for client sites.',
-      'Worked in an agile team, shipping features on a two-week release cycle.',
-    ],
+    period: '2016 — 2019',
+    degree: 'Diploma in Robotics Engineering (Polytechnic)',
+    institution: 'Thiru Seven Hills Polytechnic College',
+    // description:
+    //   'Focused on Physics, Chemistry, and Mathematics with Computer Science as elective. Participated in various tech competitions and workshops.',
+    achievements: ['Percentage: 69%'],
+    current: false,
   },
+  // Add more education here as needed
 ]
