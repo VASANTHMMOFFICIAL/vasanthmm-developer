@@ -5,6 +5,7 @@ import { SiVite } from 'react-icons/si'
 import { useTypingEffect } from '../../hooks/useTypingEffect.js'
 import profilePhoto from '../../assets/images/profile.jpg'
 import styles from './Hero.module.css'
+import resumePdf from "./assets/PDF/VASANTH_MM_RESUME.pdf";
 
 const ROLES = [
   'Frontend Developer',
@@ -95,7 +96,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <a href="assets/PDF/Vasanth_M.M_Resume.pdf" download className="btn btn-primary">
+            <a href={resumePdf} download className="btn btn-primary">
               <FiDownload /> Download Resume
             </a>
             <button type="button" className="btn btn-outline" onClick={handleHireMe}>
