@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { FiArrowUp } from 'react-icons/fi'
+import logo from '../../assets/images/logo.png'
 import styles from './Footer.module.css'
 
 const quickLinks = [
@@ -31,7 +32,8 @@ function Footer() {
       <div className={`container ${styles.content}`}>
         <div className={styles.row}>
           <p className={styles.logo}>
-           <span className="gradient-text">VMM</span>
+            <img src={logo} alt="VMM logo" className={styles.logoImg} />
+            Vasanth<span className="gradient-text">M M</span>
           </p>
 
           <nav className={styles.links}>
@@ -62,7 +64,13 @@ function Footer() {
 
         <div className={styles.bottomRow}>
           <p className={styles.copy}>© {year} Vasanth M.M. All rights reserved.</p>
-     
+          <button
+            className={styles.topBtn}
+            onClick={() => scrollToSection('home')}
+            aria-label="Back to top"
+          >
+            Back to top <FiArrowUp />
+          </button>
         </div>
       </div>
     </footer>
