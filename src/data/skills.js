@@ -2,9 +2,9 @@ import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGitAlt, FaGithub, FaBootstrap, FaP
 import { SiJquery, SiNextdotjs, SiTailwindcss, SiRedux, SiReacthookform, SiAxios, SiVite, SiPostgresql } from 'react-icons/si'
 import { TbRoute } from 'react-icons/tb'
 import { FiGlobe, FiLayers, FiBox, FiMonitor, FiZap } from 'react-icons/fi'
-
+import { SiTypescript } from "react-icons/si";
 export const skillCategories = [
-  'All',
+  // 'All',
   'Frontend',
   'Frameworks',
   'API & Networking',
@@ -24,7 +24,8 @@ export const skills = [
   { id: 'react', name: 'React.js', category: 'Frontend', level: 92, icon: FaReact, color: '#61DAFB' },
 
   // Frameworks
-  { id: 'nextjs', name: 'Next.js', category: 'Frameworks', level: 78, icon: SiNextdotjs, color: '#EDEDED' },
+  { id: 'typescript', name: 'TypeScript', category: 'Frameworks', level: 80, icon: SiTypescript, color: '#3178C6' },
+  // { id: 'nextjs', name: 'Next.js', category: 'Frameworks', level: 78, icon: SiNextdotjs, color: '#EDEDED' },
   { id: 'tailwind', name: 'Tailwind CSS', category: 'Frameworks', level: 85, icon: SiTailwindcss, color: '#38BDF8' },
   { id: 'bootstrap5', name: 'Bootstrap 5', category: 'Frameworks', level: 88, icon: FaBootstrap, color: '#7952B3' },
   { id: 'react-bootstrap', name: 'React Bootstrap', category: 'Frameworks', level: 82, icon: FaBootstrap, color: '#8A63D2' },

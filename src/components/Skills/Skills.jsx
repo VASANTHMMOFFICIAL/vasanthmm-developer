@@ -59,7 +59,7 @@ function SkillChip({ skill, visible, delay }) {
 }
 
 function Skills() {
-  const [activeCategory, setActiveCategory] = useState('All')
+  const [activeCategory, setActiveCategory] = useState('Frontend')
   const [ref, visible] = useScrollAnimation({ threshold: 0.1 })
 
   const filteredSkills = useMemo(() => {
